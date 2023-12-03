@@ -70,6 +70,7 @@ namespace C_ClassesAndObjects
 
             //ArrayLists();
 
+            /*
             Hashtable studentsTable = new Hashtable();
 
             Student stud1 = new Student(1, "Maria", 98);
@@ -98,7 +99,29 @@ namespace C_ClassesAndObjects
             }
 
             Console.WriteLine($"ID: {storedStudent1.ID}, Name: {storedStudent1.NAME}, Grade: {storedStudent1.GRADE}");
+            */
 
+            Student[] students = new Student[5];
+            students[0] = new Student(1, "Denis", 88);
+            students[1] = new Student(2, "Olaf", 97);
+            students[2] = new Student(6, "Ragner", 65);
+            students[3] = new Student(1, "Luise", 73);
+            students[4] = new Student(4, "Levi", 58);
+
+            Hashtable studentsTable = new Hashtable();
+
+            foreach (Student student in students)
+            {
+                if (!studentsTable.ContainsKey(student.ID))
+                {
+                    studentsTable.Add(student.ID, student);
+                }
+            }
+
+            foreach (Student student in studentsTable.Values) 
+            {
+                Console.WriteLine($"Details from Hashtable ID: {student.ID}, Name: {student.NAME}, Grade: {student.GRADE}");
+            }
         }
         public static void Arrays()
         {
