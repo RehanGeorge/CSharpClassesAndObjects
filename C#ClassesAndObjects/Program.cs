@@ -1,4 +1,6 @@
-﻿namespace C_ClassesAndObjects
+﻿using System.Collections;
+
+namespace C_ClassesAndObjects
 {
     internal class Program
     {
@@ -42,7 +44,61 @@
             */
             //Arrays();
             //Arrays2D();
-            NestedLoopOnArray();
+            //NestedLoopOnArray();
+            //JaggedArray();
+            //JaggedArrayChallenge();
+
+            /*
+            int[] grades = new int[] { 10, 12, 14, 16, 18, 20 };
+            double average = GetAverage(grades);
+            Console.WriteLine($"The average is {average}");
+            */
+
+            /*
+            int[] happiness = new int[] { 1, 2, 3, 4, 5 };
+            SunIsShining(happiness);
+            foreach (int item in happiness)
+            {
+                Console.WriteLine(item);
+            }
+            */
+
+            //ParamsMethod("Hello", "World", "!");
+            //ParamsMethod2("Hello", 50, 3.14f, '@', 4, 5, 6, 7, 8, 9, 10);
+
+            //Console.WriteLine(MinV2(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+
+            //ArrayLists();
+
+            Hashtable studentsTable = new Hashtable();
+
+            Student stud1 = new Student(1, "Maria", 98);
+            Student stud2 = new Student(2, "Jason", 76);
+            Student stud3 = new Student(3, "Clara", 43);
+            Student stud4 = new Student(4, "Steve", 55);
+
+            studentsTable.Add(stud1.ID, stud1);
+            studentsTable.Add(stud2.ID, stud2);
+            studentsTable.Add(stud3.ID, stud3);
+            studentsTable.Add(stud4.ID, stud4);
+
+            Student storedStudent1 = (Student)studentsTable[stud1.ID];
+
+            foreach (DictionaryEntry student in studentsTable)
+            {
+                Student temp = (Student)student.Value;
+                Console.WriteLine($"ID: {temp.ID}, Name: {temp.NAME}, Grade: {temp.GRADE}");
+            }
+
+            foreach (Student value in studentsTable.Values)
+            {
+                Console.WriteLine($"Student ID: {value.ID}");
+                Console.WriteLine($"Student Name: {value.NAME}");
+                Console.WriteLine($"Student Grade: {value.GRADE}");
+            }
+
+            Console.WriteLine($"ID: {storedStudent1.ID}, Name: {storedStudent1.NAME}, Grade: {storedStudent1.GRADE}");
+
         }
         public static void Arrays()
         {
@@ -106,7 +162,7 @@
                 {4,5,6}, // row 1
                 {7,8,9} // row 2
             };
-            Console.WriteLine($"Central value is {array2D[1,1]}");
+            Console.WriteLine($"Central value is {array2D[1, 1]}");
 
             string[,,] array3D = new string[,,]
             {
@@ -131,7 +187,7 @@
                     {"320", "321"}
                 }
             };
-            Console.WriteLine($"Central value is {array3D[1,1,1]}");
+            Console.WriteLine($"Central value is {array3D[1, 1, 1]}");
 
             string[,] array2DString = new string[,]
             {
@@ -171,7 +227,7 @@
                     //matrix[i, j] = 0;
                     //Console.Write($"{matrix[i, j]} ");
                     //Print only odd numbers
-                    
+
                     if (matrix[i, j] % 2 == 1)
                     {
                         Console.Write($"{matrix[i, j]} ");
@@ -210,5 +266,140 @@
                 Console.WriteLine(matrix[i, j]);
             }
         }
+        public static void JaggedArray()
+        {
+            // Declare the array of two elements:
+            int[][] jaggedArray = new int[3][];
+
+            // Initialize the elements:
+            jaggedArray[0] = new int[3];
+            jaggedArray[1] = new int[6];
+            jaggedArray[2] = new int[3] { 1, 2, 3 };
+
+            // Initialize the elements:
+            jaggedArray[0] = new int[] { 1, 2, 3 };
+            jaggedArray[1] = new int[] { 1, 2, 3, 4, 5, 6 };
+
+            //Alternative way
+            int[][] jaggedArray2 = new int[][]
+            {
+                new int[] { 1, 2, 3 },
+                new int[] { 1, 2, 3, 4, 5, 6 },
+                new int[] { 1, 2, 3 }
+            };
+
+            Console.WriteLine($"The value in the middle of the first entry is {jaggedArray[0][1]}");
+            foreach (int[] item in jaggedArray2)
+            {
+                foreach (int item2 in item)
+                {
+                    Console.WriteLine($"The value is {item2}");
+                }
+            }
+        }
+        public static void JaggedArrayChallenge()
+        {
+            string[][] jaggedArrayFriends = new string[3][]
+            {
+                new string[] { "Kyle", "Martha" },
+                new string[] { "John", "Carol" },
+                new string[] { "Chris", "Amanda" }
+            };
+
+            Console.WriteLine($"Hi {jaggedArrayFriends[1][1]}. My name is {jaggedArrayFriends[0][0]}");
+            Console.WriteLine($"Hi {jaggedArrayFriends[0][1]}. My name is {jaggedArrayFriends[1][0]}");
+            Console.WriteLine($"Hi {jaggedArrayFriends[2][1]}. My name is {jaggedArrayFriends[2][0]}");
+        }
+        static double GetAverage(int[] gradesArray)
+        {
+            int size = gradesArray.Length;
+            double average;
+            int sum = 0;
+
+            for (int i = 0; i < size; i++)
+            {
+                sum += gradesArray[i];
+            }
+            average = (double)sum / size;
+            return average;
+        }
+
+        static void SunIsShining(int[] happinessArray)
+        {
+            int addFactor = 2;
+            int size = happinessArray.Length;
+
+            for (int i = 0; i < size; i++)
+            {
+                happinessArray[i] += addFactor;
+            }
+        }
+        public static void ParamsMethod(params string[] sentence)
+        {
+            for (int i = 0; i < sentence.Length; i++)
+            {
+                Console.WriteLine(sentence[i]);
+            }
+        }
+        public static void ParamsMethod2(params object[] stuff)
+        {
+            foreach (object obj in stuff)
+            {
+                Console.Write($"{obj} ");
+            }
+            Console.WriteLine("");
+        }
+
+        public static int MinV2(params int[] numbers)
+        {
+            int min = int.MaxValue;
+            foreach (int number in numbers)
+            {
+                if (number < min)
+                {
+                    min = number;
+                }
+            }
+            return min;
+        }
+
+        static void ArrayLists()
+        {
+            //Declaring an ArrayList with undefined amount of objects
+            ArrayList myArrayList = new ArrayList();
+            //Declaring an ArrayList with defined amount of objects
+            ArrayList myArrayList2 = new ArrayList(100);
+
+            myArrayList.Add(25);
+            myArrayList.Add("Hello");
+            myArrayList.Add(3.14);
+            myArrayList.Add(true);
+            myArrayList.Add(false);
+            myArrayList.Add(25.3);
+            myArrayList.Add(13);
+
+            myArrayList.Remove(25);
+            myArrayList.RemoveAt(0);
+            Console.WriteLine($"The capacity of myArrayList is {myArrayList.Count}");
+
+            double sum = 0;
+
+            foreach (object obj in myArrayList)
+            {
+                if (obj is int)
+                {
+                    sum += Convert.ToDouble(obj);
+                } else if (obj is double)
+                {
+                    sum += (double)obj;
+                }
+                else if (obj is string)
+                {
+                    Console.WriteLine(obj);
+                }
+            }
+            Console.WriteLine($"The sum of the numbers in myArrayList is {sum}");
+        }
+
     }
 }
