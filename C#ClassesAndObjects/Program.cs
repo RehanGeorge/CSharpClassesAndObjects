@@ -40,7 +40,9 @@
             member1.Introducing(true);
             Console.ReadLine();
             */
-            Arrays2D();
+            //Arrays();
+            //Arrays2D();
+            NestedLoopOnArray();
         }
         public static void Arrays()
         {
@@ -100,10 +102,113 @@
             // two dimensional array
             int[,] array2D = new int[,]
             {
-                {1,2,3},
-                {4,5,6},
-                {7,8,9}
+                {1,2,3}, // row 0
+                {4,5,6}, // row 1
+                {7,8,9} // row 2
             };
+            Console.WriteLine($"Central value is {array2D[1,1]}");
+
+            string[,,] array3D = new string[,,]
+            {
+                {
+                    {"000", "001"},
+                    {"010", "011"},
+                    {"020", "021"}
+                },
+                {
+                    {"100", "101"},
+                    {"110", "111"},
+                    {"120", "121"}
+                },
+                {
+                    {"200", "201"},
+                    {"210", "211"},
+                    {"220", "221"}
+                },
+                {
+                    {"300", "301"},
+                    {"310", "311"},
+                    {"320", "321"}
+                }
+            };
+            Console.WriteLine($"Central value is {array3D[1,1,1]}");
+
+            string[,] array2DString = new string[,]
+            {
+                {"one", "two"},
+                {"three", "four"},
+                {"five", "six"},
+            };
+
+            int dimensions = array2DString.Rank;
+
+            array2DString[1, 1] = "chicken";
+            Console.WriteLine($"Central value is {array2DString[1, 1]}");
+            Console.WriteLine($"Dimensions of array2DString is {dimensions}");
+        }
+        public static void NestedLoopOnArray()
+        {
+            int[,] matrix =
+            {
+                { 1, 2, 3 },
+                { 4, 5, 6 },
+                { 7, 8, 9 }
+            };
+
+            foreach (int item in matrix)
+            {
+                Console.Write($"{item} ");
+            }
+            Console.WriteLine("");
+
+            Console.WriteLine("This is our 2D array printed using nested for loop");
+
+            Console.WriteLine("Print only odd numbers:");
+            for (int i = 0; i < matrix.GetLength(0); i++) // rows
+            {
+                for (int j = 0; j < matrix.GetLength(1); j++) // columns
+                {
+                    //matrix[i, j] = 0;
+                    //Console.Write($"{matrix[i, j]} ");
+                    //Print only odd numbers
+                    
+                    if (matrix[i, j] % 2 == 1)
+                    {
+                        Console.Write($"{matrix[i, j]} ");
+                    }
+                }
+            }
+
+            Console.WriteLine("Print only diagonal numbers:");
+            for (int i = 0; i < matrix.GetLength(0); i++) // rows
+            {
+                for (int j = 0; j < matrix.GetLength(1); j++) // columns
+                {
+                    if (i == j)
+                    {
+                        Console.Write($"{matrix[i, j]} ");
+                    }
+                    else
+                    {
+                        Console.Write(" ");
+                    }
+                }
+                Console.WriteLine("");
+            }
+
+            //Doing the above with one loop
+            Console.WriteLine("Print only diagonal numbers:");
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                Console.WriteLine(matrix[i, i]);
+            }
+
+            // Capturing the other diagonal
+            Console.WriteLine("Print the other diagonal numbers:");
+            for (int i = 0, j = 2; i < matrix.GetLength(0); i++, j--)
+            {
+                Console.WriteLine(matrix[i, j]);
+            }
         }
     }
 }
