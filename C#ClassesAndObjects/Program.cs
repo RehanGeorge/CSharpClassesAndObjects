@@ -101,6 +101,7 @@ namespace C_ClassesAndObjects
             Console.WriteLine($"ID: {storedStudent1.ID}, Name: {storedStudent1.NAME}, Grade: {storedStudent1.GRADE}");
             */
 
+            /*
             Student[] students = new Student[5];
             students[0] = new Student(1, "Denis", 88);
             students[1] = new Student(2, "Olaf", 97);
@@ -122,6 +123,63 @@ namespace C_ClassesAndObjects
             {
                 Console.WriteLine($"Details from Hashtable ID: {student.ID}, Name: {student.NAME}, Grade: {student.GRADE}");
             }
+            */
+            
+            /*
+            Employee[] employees =
+            {
+                new Employee("CEO", "Gwyn", 95, 200),
+                new Employee("Manager", "Joe", 35, 25),
+                new Employee("HR", "Lora", 32, 21),
+                new Employee("Secretary", "Petra", 28, 18),
+                new Employee("Lead Developer", "Artorias", 55, 35),
+                new Employee("Intern", "Ernest", 22, 8),
+            };
+
+            Dictionary<string, Employee> employeesDictionary = new Dictionary<string, Employee>();
+            foreach (Employee employee in employees) { employeesDictionary.Add(employee.Role, employee); }
+
+            string key = "CEO";
+            if (employeesDictionary.ContainsKey(key))
+            {
+                Employee empl = employeesDictionary[key];
+                Console.WriteLine($"Employee {empl.Name} is a {empl.Role} and earns {empl.Salary} per year");
+            }
+            else
+            {
+                Console.WriteLine($"Employee with key {key} does not exist");
+            }
+
+            // Alternative Way
+            if (employeesDictionary.TryGetValue(key, out Employee empl2))
+            {
+                Console.WriteLine($"Employee {empl2.Name} is a {empl2.Role} and earns {empl2.Salary} per year");
+            }
+            else
+            {
+                Console.WriteLine($"Employee with key {key} does not exist");
+            }
+
+            //Using for loop
+            for (int i = 0; i < employees.Length; i++)
+            {
+                Console.WriteLine($"Employee {employees[i].Name} is a {employees[i].Role} and earns {employees[i].Salary} per year");
+            }
+
+            string keyToUpdate = "CEO";
+            if (employeesDictionary.ContainsKey(keyToUpdate))
+            {
+                Employee empl = employeesDictionary[keyToUpdate];
+                empl.Name = "Gwyn Lord of Cinder";
+                employeesDictionary[keyToUpdate] = empl;
+            }
+            else
+            {
+                Console.WriteLine($"Employee with key {keyToUpdate} does not exist");
+            }
+
+            Console.WriteLine(employeesDictionary["CEO"].Name);
+            */
         }
         public static void Arrays()
         {
@@ -424,5 +482,46 @@ namespace C_ClassesAndObjects
             Console.WriteLine($"The sum of the numbers in myArrayList is {sum}");
         }
 
+        static void Dictionaries()
+        {
+            Dictionary<int, string> myDictionary = new Dictionary<int, string>()
+            {
+                { 1, "one" },
+                { 2, "two" },
+                { 3, "three" }
+            };
+        }
+
+        class Employee
+        {
+            public string Role { get; set; }
+            public string Name { get; set; }
+            public int Age { get; set; }
+            public float Rate { get; set; }
+
+            public float Salary
+            {
+                get
+                {
+                    return Rate * 8 * 5 * 4 * 12;
+                }
+            }
+
+            public Employee(string role, string name, int age, float rate)
+            {
+                Role = role;
+                Name = name;
+                Age = age;
+                Rate = rate;
+            }
+
+            public void Details()
+            {
+                Console.WriteLine($"Role: {Role}");
+                Console.WriteLine($"Name: {Name}");
+                Console.WriteLine($"Age: {Age}");
+                Console.WriteLine($"Rate: {Rate}");
+            }
+        }
     }
 }
